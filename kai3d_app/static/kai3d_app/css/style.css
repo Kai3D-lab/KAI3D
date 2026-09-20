@@ -1,0 +1,139 @@
+/* ==============================
+   KAI 3D - Estilos principales
+   ============================== */
+
+
+/* Configuración general */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #111111;
+    color: #ffffff;
+}
+
+
+/* Navegación */
+
+header {
+    border-bottom: 1px solid #333333;
+}
+
+nav {
+    max-width: 1200px;
+    margin: auto;
+    padding: 22px 30px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.marca {
+    font-size: 28px;
+    letter-spacing: 2px;
+}
+
+.marca span {
+    color: #f28c00;
+}
+
+.menu {
+    display: flex;
+    gap: 30px;
+}
+
+.menu a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.menu a:hover {
+    color: #f28c00;
+}
+
+
+/* Sección principal */
+
+.principal {
+    max-width: 1200px;
+    min-height: 75vh;
+    margin: auto;
+    padding: 60px 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+}
+
+.presentacion {
+    flex: 1;
+}
+
+.etiqueta {
+    color: #f28c00;
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-size: 14px;
+}
+
+.presentacion h1 {
+    font-size: 58px;
+    margin: 15px 0;
+    line-height: 1.05;
+}
+
+.presentacion h2 {
+    font-size: 24px;
+    font-weight: normal;
+    color: #cccccc;
+}
+
+.descripcion {
+    max-width: 550px;
+    color: #aaaaaa;
+    line-height: 1.7;
+    margin: 25px 0 35px;
+}
+
+
+/* Botón principal */
+
+.boton-principal {
+    display: inline-block;
+
+    background-color: #f28c00;
+    color: #111111;
+
+    padding: 15px 28px;
+
+    text-decoration: none;
+    font-weight: bold;
+
+    border-radius: 6px;
+}
+
+.boton-principal:hover {
+    background-color: #ffffff;
+}
+
+
+/* Imagen principal */
+
+.imagen-principal {
+    flex: 1;
+
+    display: flex;
+    justify-content: center;
+}
+
+.logo-kai {
+    width: 500px;
+    max-width: 100%;
+    height: auto;
+}

@@ -1,14 +1,58 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>KAI 3D</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>KAI 3D | Ideas que cobran forma</title>
+
+    <link rel="stylesheet" href="{% static 'kai3d_app/css/style.css' %}">
 </head>
 
 <body>
-    <h1>KAI 3D</h1>
-    <h2>Ideas que cobran forma</h2>
 
-    <p>Impresión 3D personalizada en Sevilla.</p>
+    <header>
+        <nav>
+            <div class="marca">
+                <strong>KAI <span>3D</span></strong>
+            </div>
+
+            <div class="menu">
+                <a href="#">Inicio</a>
+                <a href="#">Presupuesto</a>
+                <a href="#">Mis pedidos</a>
+                <a href="#">Iniciar sesión</a>
+            </div>
+        </nav>
+    </header>
+
+
+    <main>
+        <section class="principal">
+
+            <div class="presentacion">
+                <h1>Ideas today.<br>Reality tomorrow.</h1>
+
+                <p class="descripcion">
+                    Convierte tu archivo STL en una pieza real.
+                    Sube tu diseño, selecciona el material y obtén
+                    un presupuesto para tu impresión.
+                </p>
+
+                <a class="boton-principal" href="#">COMENZAR</a>
+            </div>
+
+
+            <div class="imagen-principal">
+                <img class="logo-kai"
+                     src="{% static 'kai3d_app/images/kai3d_logo.png' %}"
+                     alt="KAI 3D - Ideas que cobran forma.">
+            </div>
+
+        </section>
+    </main>
+
 </body>
 </html>
