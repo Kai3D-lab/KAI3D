@@ -1,9 +1,15 @@
-import os
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+from urllib.parse import urlparse, parse_qsl
+
+load_dotenv()
 
 # BASE_DIR representa el directorio raiz del proyecto y se puede construir rutas relacionadas.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# 06_Django_Architectura_y_Configuracion.ipynb
+# powershell  >>>  python manage.py runserver
 
 # Quick-start development settings - unsuitable for production
 # See ...
@@ -22,8 +28,10 @@ ALLOWED_HOSTS = [
     "kai-3-d.vercel.app"]
 
 # Definicion de aplicacion
+# 06_Django_Architectura_y_Configuracion.ipynb
 
 INSTALLED_APPS = [
+    # Cosas que Django trae preinstaladas de fabrica (Seguridad, Admin...)
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -31,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # TU APP PROPIA VA AQUI!!!!!! 
     'kai3d_app', # Esto es la aplicacion
 ]
 
@@ -67,10 +76,17 @@ WSGI_APPLICATION = 'kai3d_core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
 
+tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': tmpPostgres.path.replace('/', ''),
+        'USER': tmpPostgres.username,
+        'PASSWORD': tmpPostgres.password,
+        'HOST': tmpPostgres.hostname,
+        'PORT': 5432,
+        'OPTIONS': dict(parse_qsl(tmpPostgres.query)),
     }
 }
 

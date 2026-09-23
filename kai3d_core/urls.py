@@ -19,6 +19,7 @@ from django.contrib import admin
 from django.urls import include, path # path
 
 urlpatterns = [
+    # /admin/ >>> Django Admin
     path('admin/', admin.site.urls),
 
     # Browser >>> kai3d_core/urls.py >>> is it/admin/? >>> 
