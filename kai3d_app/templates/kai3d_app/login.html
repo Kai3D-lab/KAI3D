@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scaled=1.0">
+
+    <title>Iniciar sesión | KAI 3D</title>
+</head>
+<body>
+
+    <!-- Formulario para iniciar sesion -->
+    <h1>Iniciar sesión</h1>
+
+    <form method="POST">
+        
+        <!-- Token de seguridad requerido por Django -->
+        {% csrf_token %}
+        
+        <!-- Campos generados por AuthentificationForm -->
+        {{ formulario.as_p }}
+
+        <button type="submit">Iniciar sesión</button>
+
+    </form>
+
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+<!-- Crear registro -->
+
+<DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear cuenta | KAI 3D</title>
+</head>
+
+<body>
+<!-- Formulario para crear una nueva cuenta -->
+    <h1>Crear cuenta</h1>
+
+    <form method="POST">
+
+        <!-- Token de seguridad requerido por Django -->
+        {% csrf_token %}
+
+        <!-- Campos generados por UserCreationForm -->
+        {{ formulario.as_p }}
+
+        <button type="submit">Crear cuenta</button>
+    </form>
+
+</body>
+
+</html>

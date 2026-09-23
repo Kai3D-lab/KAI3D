@@ -2,37 +2,55 @@
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- Titulo que aparece en la pestaña del navegador -->
     <title>KAI 3D | Ideas que cobran forma</title>
 
+    <!-- Archivo css principal de KAI 3D -->
     <link rel="stylesheet" href="{% static 'kai3d_app/css/style.css' %}">
 </head>
 
 <body>
 
+    <!-- Barra de navegacion principal -->
     <header>
         <nav>
+
+            <!-- Nombre / marca de KAI 3D -->
             <div class="marca">
                 <strong>KAI <span>3D</span></strong>
             </div>
-
+            
+            <!-- Enlaces principales de navegacion -->
             <div class="menu">
                 <a href="#">Inicio</a>
                 <a href="#">Presupuesto</a>
                 <a href="#">Mis pedidos</a>
-                <a href="#">Iniciar sesión</a>
+                <!--<a href="#">Iniciar sesión</a>-->
+                {% if user.is_authenticated %}
+                    <span>Hola, {{ user.username }} </span>
+                    <a href="{% url 'logout' %}">Cerrar sesión</a>
+                {% else %}
+                    <a href="{% url 'login' %}">Iniciar sesión</a>
+                {% endif %}
             </div>
         </nav>
     </header>
 
 
+    <!-- Contenido principal de la pagina -->
     <main>
+        
+        <!-- Seccion de presentacion de KAI 3D -->
         <section class="principal">
 
+            <!-- Informacion principal y acceso al presupuesto -->
             <div class="presentacion">
+
                 <h1>Ideas today.<br>Reality tomorrow.</h1>
 
                 <p class="descripcion">
@@ -41,18 +59,23 @@
                     un presupuesto para tu impresión.
                 </p>
 
+                <!-- Boton que llevara al proceso de presupuesto -->
                 <a class="boton-principal" href="#">COMENZAR</a>
             </div>
 
 
+            <!-- Imagen principal / identidad visual de KAI 3D -->
             <div class="imagen-principal">
+
                 <img class="logo-kai"
                      src="{% static 'kai3d_app/images/kai3d_logo.png' %}"
                      alt="KAI 3D - Ideas que cobran forma.">
             </div>
 
         </section>
+
     </main>
 
 </body>
+
 </html>

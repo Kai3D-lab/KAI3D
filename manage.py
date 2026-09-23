@@ -3,10 +3,12 @@
 import os
 import sys
 
-
+# Flow
+# py manage.py runserver  >>>  manage.py  >>>  Django command system  >>>  runserver  >>>  KAI 3D development server starts
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'kai3d_core.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 
+                          'kai3d_core.settings')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

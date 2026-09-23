@@ -15,9 +15,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import include, path
+# Añadimos path porque creamos otro archivo URL  kai3d_app >>> urls.py
+from django.urls import include, path # path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('kai3d_app.urls')),
+
+    # Browser >>> kai3d_core/urls.py >>> is it/admin/? >>> 
+    # yes >>> Django Admin
+    # no >>> kai3d_app/urls.py
+    path('', include('kai3d_app.urls')), 
 ]
+
