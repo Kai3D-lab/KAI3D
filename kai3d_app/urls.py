@@ -4,6 +4,9 @@
 from django.urls import path
 from . import views
 
+
+# 08_Django_Vistas_y_Templates.ipynb
+# Conectamos nuestras vistas del CRUD en el archivo de rutas central urls.py
 urlpatterns = [
     # Pagina principal
     path('', views.inicio, name='inicio'),
