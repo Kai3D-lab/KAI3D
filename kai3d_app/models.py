@@ -7,10 +7,10 @@ from django.db import models
 
 # MATERIAL  >>> id, nombre, precio_gramo
 class Material(models.Model):
-    """Representa un material disponible para impresión 3D."""
+    """Representa el material disponible para impresión 3D."""
 
     nombre = models.CharField(max_length=200)
-    precio_gramo = models.DecimalField(max_digits=5, decimal_places=2)
+    precio_gramo = models.DecimalField(max_digits=6, decimal_places=3)
 
     def __str__(self):
         return self.nombre

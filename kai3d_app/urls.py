@@ -13,10 +13,10 @@ urlpatterns = [
 
     # Pagina para crear una cuenta
     path('registro/', views.registro, name='registro'),
+    # Pagina para iniciar sesion,
 
-    # Pagina para iniciar sesion
     path('login/', views.iniciar_sesion, name='login'),
 
-    # Cerrar la sesión del usuario
+    # Cerrar la sesión del usuario 
     path('logout/', views.cerrar_sesion, name='logout'),
 ]
