@@ -69,16 +69,3 @@ class Impresion(models.Model):
     def __str__(self):
         return f"Impresion {self.id} - {self.usuario}"
 
-# Perfil del usuario
-# User  1:1  PerfilUsuario
-
-# Informacion adicional que no existe en el modelo User de Django
-class PerfilUsuario(models.Model):
-    usuario = models.OneToOneField(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE)
-
-    telefono = models.CharField(max_length=20)
-
-    def __str__(self):
-        return self.usuario.username
