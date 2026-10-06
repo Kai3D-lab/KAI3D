@@ -13,8 +13,12 @@ from django.shortcuts import render, redirect
 
 # Se utilizan los formularios de autenticacion integrados de Django para crear
 # usuarios e iniciar sesion sin gestionar contraseñas manualmente.
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout
+from django.contrib.auth.decorators import login_required
+
+from .forms import RegistroUsuarioForm, ImpresionForm 
+from .models import Impresion
 
 # Crea tus vistas aqui.
 # kai3d_app/templates/kai3d_app/inicio.html
@@ -32,19 +36,25 @@ def registro(request):
     """Muestra el formulario para crear una cuenta de usuario."""
 
     if request.method == 'POST':
-        formulario = UserCreationForm(request.POST)
+        formulario = RegistroUsuarioForm(request.POST)
 
         # Comprueba que los datos introducidos son validos
         if formulario.is_valid():
-            formulario.save() # PUM! INSERT magico a la base de datos sin SQL
+            usuario = formulario.save()
+
+            # Inicia sesion automaticamente al usuario que se acaba de registrar
+            login(request, usuario)
 
             # Despues de crear la cuenta, vuelve a la pagina principal
             return redirect('inicio')
     else:
-        formulario = UserCreationForm()
+        formulario = RegistroUsuarioForm()
 
     # Envia el formulario de Python and HTML
-    return render(request, 'kai3d_app/registro.html', {'formulario': formulario})
+    return render(
+        request, 
+        'kai3d_app/registro.html', 
+        {'formulario': formulario})
 
 # Crear la vista para iniciar sesion
 
@@ -80,3 +90,37 @@ def cerrar_sesion(request):
 
     return redirect('inicio')
 
+# Crear una nueva impresion  
+@login_required
+def crear_impresion(request):
+    if request.method == 'POST':
+        formulario = ImpresionForm(request.POST, request.FILES)
+
+        if formulario.is_valid():
+            # Todavia no guarda en la base de datos, solo crea un objeto Impresion en memoria
+            impresion = formulario.save(commit=False)
+            # Asocia la impresion con el usuario autenticado
+            impresion.usuario = request.user
+            # Ahora si guarda en la base de datos
+            impresion.save()
+
+            return redirect('inicio')
+    else:
+        formulario = ImpresionForm()
+
+    return render(
+        request, 
+        'kai3d_app/crear_impresion.html', 
+        {'formulario': formulario})
+
+# Mostrar los pedidos del usuario 
+@login_required
+def mis_pedidos(request):
+
+    # Solo busca las impresiones asociadas al usuario conectado
+    impresiones = Impresion.objects.filter(usuario=request.user)
+
+    return render(
+        request, 
+        'kai3d_app/mis_pedidos.html', 
+        {'impresiones': impresiones})   

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Nueva impresión - KAI 3D</title>
+</head>
+
+<body>
+    
+    <h1>Nueva impresión</h1>
+
+    <p>Sube tu archivo STL y selecciona las opciones de impresión.</p>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {{ formulario.as_p }}
+
+        <button type="submit">Enviar</button>
+    </form>
+
+</body>
+
+</html>

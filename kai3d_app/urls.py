@@ -19,4 +19,10 @@ urlpatterns = [
 
     # Cerrar la sesión del usuario 
     path('logout/', views.cerrar_sesion, name='logout'),
+
+    # Crear una nueva impresion
+    path('crear-impresion/', views.crear_impresion, name='crear_impresion'),
+
+    # ver los pedidos del usuario
+    path('mis-pedidos/', views.mis_pedidos, name='mis_pedidos'),
 ]

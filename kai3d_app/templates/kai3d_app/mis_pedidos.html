@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mis pedidos - KAI 3D</title>
+</head>
+
+<body>
+
+    <h1>Mis pedidos</h1>
+
+    {% for impresion in impresiones %}
+
+        <h2>Pedido #{{ impresion.id }}</h2>
+
+        <p>Fecha: {{ impresion.fecha }}</p>
+        <p>Material: {{ impresion.material }}</p>
+        <p>Cantidad: {{ impresion.cantidad }}</p>
+        <p>Estado: {{ impresion.estado }}</p>
+
+        {% if impresion.precio %}
+            <p>Precio: {{ impresion.precio }}</p>
+        {% else %}
+            <p>Precio: Pendiente de cálculo</p>
+        {% endif %}
+
+        <hr>
+
+    {% empty %}
+
+        <p>Todavía no has realizado ningún pedido.</p>
+
+    {% endfor %}
+
+</body>
+
+</html>
