@@ -1,28 +1,49 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scaled=1.0">
 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar sesión | KAI 3D</title>
+    <link rel="stylesheet" href="{% static 'kai3d_app/css/style.css' %}">
+    
 </head>
+
 <body>
 
-    <!-- Formulario para iniciar sesion -->
-    <h1>Iniciar sesión</h1>
+    <!-- Botón para volver al inicio -->
+    <a href="{% url 'inicio' %}" class="boton-inicio">
+        ← Volver al inicio
+    </a>
 
-    <form method="POST">
-        
-        <!-- Token de seguridad requerido por Django -->
-        {% csrf_token %}
-        
-        <!-- Campos generados por AuthentificationForm -->
-        {{ formulario.as_p }}
+    <!-- Encabezado -->
+    <div class="encabezado-pedidos">
+        <div>
+            <h1>Iniciar <span>sesión</span></h1>
+            <p>Accede a tu cuenta para gestionar tus impresiones 3D.</p>
+        </div>
 
-        <button type="submit">Iniciar sesión</button>
+        <img
+            src="{% static 'kai3d_app/images/kai3d_logo.png' %}"
+            alt="Kai, mascota de KAI 3D"
+            class="mascota-pedidos">
+    </div>
 
-    </form>
+    <!-- Formulario de inicio de sesión -->
+    <main class="contenedor-impresion">
+
+        <form method="POST">
+            {% csrf_token %}
+
+            {{ formulario.as_p }}
+
+            <button type="submit">Iniciar sesión</button>
+        </form>
+
+    </main>
 
 </body>
 

@@ -1,31 +1,54 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="es">
+
 
 <head>
     <meta charset="UTF-8">
     <title>Mis pedidos - KAI 3D</title>
+    <link rel="stylesheet" href="{% static 'kai3d_app/css/style.css' %}">
 </head>
 
 <body>
+    <a href="{% url 'inicio' %}" class="boton-inicio">
+    ← Volver al inicio
+    </a>
+    <div class="encabezado-pedidos">
+        <div>
+            <h1>Mis <span>pedidos</span></h1>
+            <p>Aquí puedes consultar el estado de tus impresiones 3D.</p>
+        </div>
 
-    <h1>Mis pedidos</h1>
+        <img
+            src="{% static 'kai3d_app/images/kai3d_logo.png' %}"
+            alt="Kai, mascota de KAI 3D"
+            class="mascota-pedidos">
+    </div>
 
     {% for impresion in impresiones %}
+
+    <div class="tarjeta-pedido">
 
         <h2>Pedido #{{ impresion.id }}</h2>
 
         <p>Fecha: {{ impresion.fecha }}</p>
         <p>Material: {{ impresion.material }}</p>
         <p>Cantidad: {{ impresion.cantidad }}</p>
-        <p>Estado: {{ impresion.estado }}</p>
-
+        <p>
+            Estado:
+            <span class="estado-pedido estado-{{ impresion.estado|slugify }}">
+                {{ impresion.estado }}
+            </span>
+        </p>
+        
         {% if impresion.precio %}
             <p>Precio: {{ impresion.precio }}</p>
         {% else %}
             <p>Precio: Pendiente de cálculo</p>
         {% endif %}
 
-        <hr>
+    </div>
 
     {% empty %}
 
@@ -36,3 +59,5 @@
 </body>
 
 </html>
+
+

@@ -20,8 +20,15 @@ from django.contrib.auth.decorators import login_required
 from .forms import RegistroUsuarioForm, ImpresionForm 
 from .models import Impresion
 
+import logging
+logger = logging.getLogger("kai3d_app")
+
+from .core.piezas import PiezaCliente, DatosPiezaInvalidosError
+
+
 # Crea tus vistas aqui.
 # kai3d_app/templates/kai3d_app/inicio.html
+
 def inicio(request):
     """Muestra la pagina principal de KAI 3D."""
     return render(request, 'kai3d_app/inicio.html')
@@ -60,6 +67,7 @@ def registro(request):
 
 # KAI 3D necesita identificar al usuario para asociar sus futuros pedidos,
 # impresiones a su cuenta
+
 def iniciar_sesion(request):
     """Muestra el formulario para iniciar sesion."""
 
@@ -73,6 +81,10 @@ def iniciar_sesion(request):
             # Inicia la sesión del usuario
             login(request, usuario)
 
+            # Coprueba si hay una URL de redireccionamiento despues de iniciar sesion
+            siguiente = request.GET.get('next')
+            if siguiente:
+                return redirect(siguiente)
             return redirect('inicio')
 
     else:
@@ -90,21 +102,57 @@ def cerrar_sesion(request):
 
     return redirect('inicio')
 
-# Crear una nueva impresion  
+
+# Crear una nueva impresion 
+
 @login_required
+
 def crear_impresion(request):
+    """Procesa una solicitud de impresion 3D."""
+    # Pseudocodigo:
+    # 1. Recibir los datos y el archivo STL del usuario.
+    # 2. Validar los datos del formulario.
+    # 3. Asociar el pedido con el usuario autenticado.
+    # 4. Crear un objeto PiezaCliente.
+    # 5. Calcular el peso y el coste del material.
+    # 6. Si hay un error, mostrarlo y registrar una advertencia.
+    # 7. Si todo es correcto, guardar el pedido en la base de datos.
+
     if request.method == 'POST':
         formulario = ImpresionForm(request.POST, request.FILES)
 
         if formulario.is_valid():
             # Todavia no guarda en la base de datos, solo crea un objeto Impresion en memoria
             impresion = formulario.save(commit=False)
+
             # Asocia la impresion con el usuario autenticado
             impresion.usuario = request.user
-            # Ahora si guarda en la base de datos
-            impresion.save()
 
-            return redirect('inicio')
+            try:
+                # Crear el objeto POO con los datos del pedido
+                pieza = PiezaCliente(
+                    impresion.fichero.name,
+                    impresion.cantidad,
+                    impresion.volumen_cm3,
+                    impresion.material.densidad,
+                    impresion.material.precio_gramo)
+
+                # Calcular peso y coste utilizando el Core POO
+                impresion.peso_estimado = pieza.calcular_peso()
+                # Calcular el coste del material utilizando el Core POO
+                impresion.coste_material = round(pieza.calcular_coste(), 2)
+
+            except DatosPiezaInvalidosError as error:
+                logger.warning("Datos de pieza invalidos: %s", error)
+                formulario.add_error(None, str(error))
+            else:        
+                # Guardar el pedido solo si el calculo fue correcto
+                impresion.save()
+
+                # Log de la creacion de la impresion
+                logger.info("Nuevo pedido creado correctamente.")
+
+                return redirect('mis_pedidos')
     else:
         formulario = ImpresionForm()
 
@@ -113,12 +161,15 @@ def crear_impresion(request):
         'kai3d_app/crear_impresion.html', 
         {'formulario': formulario})
 
+
 # Mostrar los pedidos del usuario 
+
 @login_required
+
 def mis_pedidos(request):
 
     # Solo busca las impresiones asociadas al usuario conectado
-    impresiones = Impresion.objects.filter(usuario=request.user)
+    impresiones = Impresion.objects.filter(usuario=request.user).order_by("-fecha")
 
     return render(
         request, 

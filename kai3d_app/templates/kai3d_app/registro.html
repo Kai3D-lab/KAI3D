@@ -1,28 +1,48 @@
-<!-- Crear registro -->
 
-<DOCTYPE html>
+{% load static %}
+
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear cuenta | KAI 3D</title>
+    <link rel="stylesheet" href="{% static 'kai3d_app/css/style.css' %}">
 </head>
 
 <body>
-<!-- Formulario para crear una nueva cuenta -->
-    <h1>Crear cuenta</h1>
 
-    <form method="POST">
+    <!-- Botón para volver al inicio -->
+    <a href="{% url 'inicio' %}" class="boton-inicio">
+        ← Volver al inicio
+    </a>
 
-        <!-- Token de seguridad requerido por Django -->
-        {% csrf_token %}
+    <!-- Encabezado -->
+    <div class="encabezado-pedidos">
+        <div>
+            <h1>Crear <span>cuenta</span></h1>
+            <p>Regístrate para solicitar tus impresiones 3D.</p>
+        </div>
 
-        <!-- Campos generados por UserCreationForm -->
-        {{ formulario.as_p }}
+        <img
+            src="{% static 'kai3d_app/images/kai3d_logo.png' %}"
+            alt="Kai, mascota de KAI 3D"
+            class="mascota-pedidos">
+    </div>
 
-        <button type="submit">Crear cuenta</button>
-    </form>
+    <!-- Formulario de registro -->
+    <main class="contenedor-impresion">
+
+        <form method="POST">
+            {% csrf_token %}
+
+            {{ formulario.as_p }}
+
+            <button type="submit">Crear cuenta</button>
+        </form>
+
+    </main>
 
 </body>
 

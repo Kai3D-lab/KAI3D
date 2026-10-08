@@ -3,109 +3,78 @@
    ============================== */
 
 
-/* Configuración general */
+                /* Configuración general */
 
-* {
-    box-sizing: border-box;
-}
+* {box-sizing: border-box;}
 
-body {
-    margin: 0;
+body {margin: 0;
     font-family: Arial, Helvetica, sans-serif;
     background-color: #111111;
-    color: #ffffff;
-}
+    color: #ffffff;}
 
 
-/* Navegación */
+                /* Navegación */
 
-header {
-    border-bottom: 1px solid #333333;
-}
+header {border-bottom: 1px solid #333333;}
 
-nav {
-    max-width: 1200px;
-    margin: auto;
+nav {max-width: 1200px; 
+    margin: auto; 
     padding: 22px 30px;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;}
 
-.marca {
-    font-size: 28px;
-    letter-spacing: 2px;
-}
+.marca {font-size: 28px; 
+    letter-spacing: 2px;}
 
-.marca span {
-    color: #f28c00;
-}
+.marca span {color: #f28c00;}
 
-.menu {
-    display: flex;
-    gap: 30px;
-}
+.menu {display: flex; 
+    gap: 30px;}
 
-.menu a {
-    color: #ffffff;
-    text-decoration: none;
-}
+.menu a {color: #ffffff; 
+    text-decoration: none;}
 
-.menu a:hover {
-    color: #f28c00;
-}
+.menu a:hover {color: #f28c00;}
 
 
-/* Sección principal */
+                /* Sección principal */
 
-.principal {
-    max-width: 1200px;
-    min-height: 75vh;
-    margin: auto;
+.principal {max-width: 1200px; 
+    min-height: 75vh; 
+    margin: auto; 
     padding: 60px 30px;
 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 60px;
-}
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    gap: 60px;}
 
-.presentacion {
-    flex: 1;
-}
+.presentacion {flex: 1;}
 
-.etiqueta {
-    color: #f28c00;
+.etiqueta {color: #f28c00;
     font-weight: bold;
     letter-spacing: 2px;
-    font-size: 14px;
-}
+    font-size: 14px;}
 
-.presentacion h1 {
-    font-size: 58px;
+.presentacion h1 {font-size: 58px;
     margin: 15px 0;
-    line-height: 1.05;
-}
+    line-height: 1.05;}
 
-.presentacion h2 {
-    font-size: 24px;
+.presentacion h2 {font-size: 24px;
     font-weight: normal;
-    color: #cccccc;
-}
+    color: #cccccc;}
 
-.descripcion {
-    max-width: 550px;
+.descripcion {max-width: 550px;
     color: #aaaaaa;
     line-height: 1.7;
-    margin: 25px 0 35px;
-}
+    margin: 25px 0 35px;}
 
 
-/* Botón principal */
+                /* Botón principal */
 
-.boton-principal {
-    display: inline-block;
+.boton-principal {display: inline-block;
 
     background-color: #f28c00;
     color: #111111;
@@ -115,25 +84,183 @@ nav {
     text-decoration: none;
     font-weight: bold;
 
-    border-radius: 6px;
-}
+    border-radius: 6px;}
 
-.boton-principal:hover {
-    background-color: #ffffff;
-}
+.boton-principal:hover {background-color: #ffffff;}
 
 
-/* Imagen principal */
+                /* Imagen principal */
 
-.imagen-principal {
-    flex: 1;
+.imagen-principal {flex: 1;
 
     display: flex;
-    justify-content: center;
-}
+    justify-content: center;}
 
-.logo-kai {
-    width: 500px;
+.logo-kai {width: 500px;
     max-width: 100%;
-    height: auto;
-}
+    height: auto;}
+
+
+                /* Encabezado de Mis pedidos */
+
+.encabezado-pedidos {max-width: 1100px;
+    margin: 40px auto;
+    padding: 20px 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;}
+
+.encabezado-pedidos h1 {font-size: 48px;
+    margin-bottom: 10px;}
+
+.encabezado-pedidos h1 span {color: #f28c00;}
+
+.encabezado-pedidos p {color: #aaaaaa;}
+
+.mascota-pedidos {width: 220px;
+    max-width: 40%;
+    height: auto;}
+
+
+                /* Tarjetas de pedidos */
+
+.tarjeta-pedido {max-width: 1000px;
+    margin: 25px auto;
+    padding: 25px 30px;
+
+    background-color: #1c1c1c;
+    border: 1px solid #f28c00;
+    border-radius: 12px;}
+
+.tarjeta-pedido h2 {color: #f28c00;
+    margin-top: 0;}
+
+.tarjeta-pedido p {color: #dddddd;
+    line-height: 1.6;}
+
+
+                /* Estado del pedido */
+
+.estado-pedido {display: inline-block;
+    background-color: #3a290f;
+    color: #ffad33;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-weight: bold;}
+
+
+                /* Colores segun el estado del pedido */
+
+.estado-pendiente {background-color: #3a290f;
+    color: #ffad33;}
+
+.estado-en-revision {background-color: #17334a;
+    color: #79c5ff;}
+
+.estado-presupuesto {background-color: #38254a;
+    color: #d6a5ff;}
+
+.estado-listo-para-recoger {background-color: #193c2a;
+    color: #75e5a0;}
+
+.estado-recogido {background-color: #333333;
+    color: #cccccc;}
+
+.estado-cancelado {background-color: #491f24;
+    color: #ff9090;}
+
+
+                /* Formulario de nueva impresion */
+
+.contenedor-impresion {max-width: 650px;
+    margin: 60px auto;
+    padding: 35px;
+
+    background-color: #1c1c1c;
+    border: 1px solid #f28c00;
+    border-radius: 12px;}
+
+.contenedor-impresion h1 {color: #f28c00;
+    margin-top: 0;}
+
+.contenedor-impresion > p {color: #aaaaaa;
+    line-height: 1.6;}
+    
+
+                /* Campos del formulario de impresion */
+
+.contenedor-impresion form p {margin-bottom: 20px;}
+
+.contenedor-impresion label {display: block; margin-bottom: 8px; font-weight: bold;}
+
+.contenedor-impresion input,
+.contenedor-impresion select,
+.contenedor-impresion textarea {width: 100%; padding: 12px;
+    background-color: #292929;
+    color: #ffffff;
+    border: 1px solid #555555;
+    border-radius: 6px; font: inherit;}
+
+.contenedor-impresion textarea {height: 120px;
+    resize: vertical;}
+
+.contenedor-impresion input:focus,
+.contenedor-impresion select:focus,
+.contenedor-impresion textarea:focus {outline: 2px solid #f28c00;
+    border-color: #f28c00;}
+
+.contenedor-impresion button {background-color: #f28c00;
+    color: #111111;
+    border: none;
+    border-radius: 6px;
+    padding: 14px 28px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;}
+
+.contenedor-impresion button:hover {background-color: #ffad33;}
+
+
+                /* Titulo con mascota */
+
+.titulo-impresion {display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;}
+
+.titulo-impresion img {width: 95px;
+    height: auto;}
+
+.titulo-impresion h1 {margin: 0;}
+
+
+                /* Mensajes de error del formulario */
+
+.contenedor-impresion .errorlist {color: #ff7777;
+    background-color: #3a1c1c;
+    border-left: 3px solid #ff5555;
+    border-radius: 4px;
+    padding: 12px 15px;
+    margin: 8px 0;
+    list-style: none;}
+
+.contenedor-impresion .errorlist li {margin: 4px 0;}
+
+
+                /* Botón para volver al inicio */
+
+.boton-inicio {display: block;
+    width: fit-content;
+    margin: 25px 30px 0 auto;
+    padding: 12px 20px;
+    background-color: #f28c00;
+    color: #111;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;}
+
+.boton-inicio:hover {background-color: #ffad33;}
+
+

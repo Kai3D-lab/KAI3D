@@ -14,11 +14,18 @@ class Material(models.Model):
     nombre = models.CharField(max_length=200)
     precio_gramo = models.DecimalField(max_digits=6, decimal_places=3)
 
+    densidad = models.DecimalField(
+        max_digits=6,
+        decimal_places=3,
+        default=1.240)  # Densidad en g/cm3, valor por defecto para PLA
+
     def __str__(self):
+        """Devuelve el nombre del material."""
         return self.nombre
 
 # Impresion usa Material  >>> ForeignKey
 class Impresion(models.Model):
+    """Representa una impresión 3D solicitada por un usuario."""
 
     # Si el usuario elimina su cuenta, elimina su historia de ordenes
     usuario = models.ForeignKey(
@@ -33,7 +40,7 @@ class Impresion(models.Model):
     # Archivo STL - fichero
     fichero = models.FileField(upload_to="impresiones/")
 
-    # Valores se calculan despues de revisar el archivo STL 
+    # El usuario introduce el volumen;; el peso y coste se calculan en el Core POO 
     volumen_cm3 = models.DecimalField(
         max_digits=10,
         decimal_places=3,
@@ -46,12 +53,19 @@ class Impresion(models.Model):
         null=True,
         blank=True)
 
+    # Coste estimado del material, calculado por el Core POO
+    coste_material = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        null=True,
+        blank=True)
+
     cantidad = models.PositiveIntegerField(default=1)
 
     # Informacion adicional escrita por el usuario
     notas = models.TextField(blank=True)
 
-    # Precio calculado de la impresion
+    # Precio final establecido por el administrador, puede ser diferente al coste del material
     precio = models.DecimalField(
         max_digits=10, 
         decimal_places=2,
@@ -62,10 +76,22 @@ class Impresion(models.Model):
     fecha = models.DateTimeField(auto_now_add=True)
 
     # Estado del pedido
+    ESTADOS = [
+        ('Pendiente', 'Pendiente'),
+        ('En revision', 'En revision'),
+        ('Presupuesto', 'Presupuesto'),
+        ('Listo para recoger', 'Listo para recoger'),
+        ('Recogido', 'Recogido'),
+        ('Cancelado', 'Cancelado'),
+    ]
+
+    # Estado del pedido, por defecto es Pendiente
     estado = models.CharField(
         max_length=30, 
+        choices=ESTADOS,
         default='Pendiente')
 
     def __str__(self):
+        """Devuelve el identificador del pedido y su usuario."""
         return f"Impresion {self.id} - {self.usuario}"
 

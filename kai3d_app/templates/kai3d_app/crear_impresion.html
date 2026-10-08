@@ -1,24 +1,53 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
+
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nueva impresión - KAI 3D</title>
+    <link rel="stylesheet" href="{% static 'kai3d_app/css/style.css' %}">
+    
 </head>
 
 <body>
-    
-    <h1>Nueva impresión</h1>
 
-    <p>Sube tu archivo STL y selecciona las opciones de impresión.</p>
+    <a href="{% url 'inicio' %}" class="boton-inicio">
+    ← Volver al inicio
+    </a>
 
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
+    <!-- Encabezado igual que Mis pedidos -->
+    <div class="encabezado-pedidos">
+        <div>
+            <h1>Nueva <span>impresión</span></h1>
+            <p>Sube tu archivo STL y selecciona las opciones de impresión.</p>
+        </div>
 
-        {{ formulario.as_p }}
+        <img
+            src="{% static 'kai3d_app/images/kai3d_logo.png' %}"
+            alt="Kai, mascota de KAI 3D"
+            class="mascota-pedidos">
+    </div>
 
-        <button type="submit">Enviar</button>
-    </form>
+    <!-- Formulario de impresion -->
+    <main class="contenedor-impresion">
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {{ formulario.as_p }}
+            <p class="ayuda-volumen">
+            ¿No sabes el volumen de tu pieza?
+            Puedes consultarlo en tu programa de diseño 3D.
+            Introduce el valor en cm³.
+            </p>
+
+            <button type="submit">Enviar</button>
+        </form>
+
+    </main>
 
 </body>
 
