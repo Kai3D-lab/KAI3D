@@ -1,18 +1,38 @@
+
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
-    <title>Error del servidor - KAI 3D</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error 500 | KAI 3D</title>
+    <link rel="stylesheet" href="{% static 'kai3d_app/css/style.css' %}">
 </head>
+
 <body>
-    <!-- El servidor encontró un error interno!!! -->
-    <!-- Página personalizada para errores internos del servidor -->
-    <h1>500 - Error interno del servidor</h1>
 
-    <p>Ha ocurrido un error inesperado. Inténtalo de nuevo más tarde.</p>
+    <!-- Botón para volver al inicio -->
+    <a href="/" class="boton-inicio">
+        ← Volver al inicio
+    </a>
 
-    <!-- Django utiliza el nombre de la URL para volver a la página de inicio -->
-    <a href="{% url 'inicio' %}">Volver al inicio</a>
+    <!-- Página personalizada para errores del servidor -->
+    <div class="encabezado-pedidos">
+        <div>
+            <h1>Error <span>500</span></h1>
+            <p>Ha ocurrido un error inesperado en el servidor.</p>
+            <p>Estamos trabajando para solucionarlo. Inténtalo de nuevo más tarde.</p>
+            <p>¡Kai está revisando las máquinas! 🐾</p>
+        </div>
+
+        <img
+            src="{% static 'kai3d_app/images/kai3d_logo.png' %}"
+            alt="Kai, mascota de KAI 3D"
+            class="mascota-pedidos">
+    </div>
 
 </body>
+
 </html>

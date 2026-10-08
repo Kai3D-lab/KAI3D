@@ -1,18 +1,37 @@
+
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
-    <title>Página no encontrada - KAI 3D</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error 404 | KAI 3D</title>
+    <link rel="stylesheet" href="{% static 'kai3d_app/css/style.css' %}">
 </head>
+
 <body>
-    <!-- La página 404 no existe!!! -->
+
+    <!-- Botón para volver al inicio -->
+    <a href="{% url 'inicio' %}" class="boton-inicio">
+        ← Volver al inicio
+    </a>
+
     <!-- Página personalizada para errores 404 -->
-    <h1>404 - Página no encontrada</h1>
+    <div class="encabezado-pedidos">
+        <div>
+            <h1>Error <span>404</span></h1>
+            <p>La página que buscas no existe o ha sido movida.</p>
+            <p>¡Parece que Kai tampoco encuentra esta dirección! 🐾</p>
+        </div>
 
-    <p>La página que buscas no existe o ha sido movida.</p>
-
-    <!-- Django utiliza el nombre de la URL para volver a la página de inicio -->
-    <a href="{% url 'inicio' %}">Volver al inicio</a>
+        <img
+            src="{% static 'kai3d_app/images/kai3d_logo.png' %}"
+            alt="Kai, mascota de KAI 3D"
+            class="mascota-pedidos">
+    </div>
 
 </body>
+
 </html>
