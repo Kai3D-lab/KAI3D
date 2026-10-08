@@ -167,6 +167,7 @@ def crear_impresion(request):
 @login_required
 
 def mis_pedidos(request):
+    """Muestra los pedidos del usuario autenticado, del mas reciente al mas antiguo."""
 
     # Solo busca las impresiones asociadas al usuario conectado
     impresiones = Impresion.objects.filter(usuario=request.user).order_by("-fecha")

@@ -10,6 +10,7 @@ class Pieza3D:
 
     # Atributos privados de la clase Pieza3D
     def __init__(self, nombre, cantidad):
+        """Inicializa una pieza con su nombre y cantidad."""
         self.__nombre = nombre
         self.__cantidad = cantidad
 
@@ -29,7 +30,7 @@ class Pieza3D:
 
 
 class PiezaCliente(Pieza3D):
-    """Representa una pieza enviada por un cliente para su impresion 3D."""
+    """Inicializa una pieza y valida los datos para calcular su coste."""
 
 
 # Pseudocodigo para validar los datos de una pieza:

@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import Impresion
+import re
 
 import logging
 logger = logging.getLogger("kai3d_app")
@@ -21,12 +22,11 @@ class ImpresionForm(forms.ModelForm):
         """Validar que el archivo tenga extensión .stl."""
         fichero = self.cleaned_data.get('fichero')
 
-        # Validar que el archivo tenga extensión .stl
-        if fichero and not fichero.name.lower().endswith('.stl'):
-            # Registrar las cargas de archivos STL rechazadas
+        if fichero and re.fullmatch(
+            r".+\.stl", fichero.name, flags=re.IGNORECASE):
             logger.warning("Archivo rechazado: formato no valido.")
             raise forms.ValidationError(
-                "El archivo debe tener formato .stl")
+                "El archivo debe tener extensión .stl")
         
         return fichero
 
