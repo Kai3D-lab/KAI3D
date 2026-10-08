@@ -130,6 +130,7 @@ LOGIN_URL = 'login'
 # Carpeta donde Django recopilara los archivos estaticos para produccion
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+ES_VERCEL = bool(os.getenv("VERCEL"))
 
 # Registro de eventos de KAI 3D
 LOGGING ={
@@ -141,6 +142,11 @@ LOGGING ={
         },
     },
     "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": "simple",
+            "level": "INFO",
+        },
         "file": {
             "class": "logging.FileHandler",
             "filename": BASE_DIR / "kai3d.log",
@@ -151,9 +157,15 @@ LOGGING ={
     },
     "loggers": {
         "kai3d_app": {
-            "handlers": ["file"],
+            "handlers": ["console"] if os.getenv("VERCEL") else ["file"],
             "level": "INFO",
             "propagate": False,
         },
     },
 }
+
+# En Vercel no se puede escribir en la carpeta del proyecto.
+# Eliminamos el manejador de archivo antes de configurar Django.
+if ES_VERCEL:
+    LOGGING["handlers"].pop("file", None)
+
