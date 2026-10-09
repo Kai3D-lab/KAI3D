@@ -3,6 +3,9 @@ import os
 from dotenv import load_dotenv
 from urllib.parse import urlparse, parse_qsl
 
+import dj_database_url
+
+
 load_dotenv()
 
 # BASE_DIR representa el directorio raiz del proyecto y se puede construir rutas relacionadas.
@@ -79,10 +82,11 @@ WSGI_APPLICATION = 'kai3d_core.wsgi.application'
 # tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    "default": dj_database_url.config(
+        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
+        conn_max_age=600,
+        conn_health_checks=True,
+    )
 }
 
 
