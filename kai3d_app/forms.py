@@ -22,7 +22,7 @@ class ImpresionForm(forms.ModelForm):
         """Validar que el archivo tenga extensión .stl."""
         fichero = self.cleaned_data.get('fichero')
 
-        if fichero and re.fullmatch(
+        if fichero and not re.fullmatch(
             r".+\.stl", fichero.name, flags=re.IGNORECASE):
             logger.warning("Archivo rechazado: formato no valido.")
             raise forms.ValidationError(

@@ -5,8 +5,10 @@ from urllib.parse import urlparse, parse_qsl
 
 import dj_database_url
 
-
 load_dotenv()
+
+if "test" in os.sys.argv:
+    os.environ.pop("DATABASE_URL", None)
 
 # BASE_DIR representa el directorio raiz del proyecto y se puede construir rutas relacionadas.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -18,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See ...
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-n*4s9vs50)o(=g=4zkm7!sjc#c!nsoizob_)3(xd62c!#%9=+l'
+SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = not bool(os.getenv("VERCEL"))
